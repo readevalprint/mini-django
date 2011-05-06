@@ -54,3 +54,24 @@ Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/maste
         # run the development server
         from django.core import management
         management.call_command('runserver','0.0.0.0:8000' )
+
+
+Dependencies
+===========
+* python
+* django
+
+Install
+======
+1. Install [django](http://docs.djangoproject.com/en/dev/intro/install/)
+2. get the [code](https://github.com/readevalprint/mini-django/raw/master/mini_django.py) `wget https://github.com/readevalprint/mini-django/raw/master/mini_django.py`
+3. run it `$ python ./mini_django.py`
+4. open browser http://localhost.com/Foo
+
+License
+=======
+As-is. Public Domain. Don't blame me.
+
+Author
+======
+Tim Watts (coconutrandom@gmail.com)
