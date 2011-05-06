@@ -74,4 +74,4 @@ As-is. Public Domain. Don't blame me.
 
 Author
 ======
-Tim Watts (coconutrandom@gmail.com)
+Tim Watts (tim@readevalprint.com)
