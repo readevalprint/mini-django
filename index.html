@@ -49,39 +49,89 @@
       Single file django project for instant gratification.
     </div>
 
-    <p>An entire django app in a single file. Updated from [here](http://olifante.blogs.com/covil/2010/04/minimal-django.html) to use Django trunk. </p><h2>Dependencies</h2>
-<p>* python
-* django</p>
-<h2>Install</h2>
-<p>1. Install [django](http://docs.djangoproject.com/en/dev/intro/install/)
-2. get the [code](https://github.com/readevalprint/mini-django/raw/master/mini_django.py) `wget https://github.com/readevalprint/mini-django/raw/master/mini_django.py`
-3. run it `$ python ./mini_django.py`
-4. open browser http://localhost.com/Foo</p>
-<h2>License</h2>
-<p>As-is. Public Domain. Don't blame me.</p>
-<h2>Authors</h2>
-<p>Tim Watts (tim@readevalprint.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Tim Watts (tim@readevalprint.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/readevalprint/mini-django/zipball/master">zip</a> or
-      <a href="http://github.com/readevalprint/mini-django/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/readevalprint/mini-django</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/readevalprint/mini-django">readevalprint/mini-django</a>
-    </div>
-
-  </div>
-
+   
+      
+    <div id="readme" class="announce instapaper_body md" data-path="/"><span class="name">README.md</span><div class="wikistyle"><h1>Mini_django.py</h1> 
+ 
+<p>An entire django app in a single file. Updated from <a href="http://olifante.blogs.com/covil/2010/04/minimal-django.html">here</a> to use Django trunk. </p> 
+ 
+<h1>pico</h1> 
+ 
+<p>This started off to see what the absolutely smallest requirements needed to run a Django project. Run the <a href="https://github.com/readevalprint/mini-django/blob/master/pico_django.py">pico_django.py</a> with <code>$ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django</code> and go to <a href="http://localhost:8080">http://localhost:8080</a></p> 
+ 
+<pre><code>from django.http import HttpResponse
+from django.conf.urls.defaults import patterns
+ 
+DEBUG=True
+ROOT_URLCONF = 'pico_django'
+DATABASES = { 'default': {} }
+def index(request, name):
+    return HttpResponse('Hello {name}!'.format(name=(name or 'World')))
+ 
+urlpatterns = patterns('', (r'^(?P&lt;name&gt;\w+)?$', index))
+</code></pre> 
+ 
+<h1>mini</h1> 
+ 
+<p>Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.</p> 
+ 
+<p>Run the <a href="https://github.com/readevalprint/mini-django/blob/master/mini_django.py">mini_django.py</a> with <code>$ python ./micro_django.py</code> and go to <a href="http://localhost:8000/Foo">http://localhost:8000/Foo</a></p> 
+ 
+<pre><code>import os, sys
+from django.conf.urls.defaults import patterns
+from django.template.response import TemplateResponse
+ 
+# this module
+me = os.path.splitext(os.path.split(__file__)[1])[0]
+# helper function to locate this dir
+here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+ 
+# SETTINGS
+DEBUG=TEMPLATE_DEBUG=True
+ROOT_URLCONF = me
+DATABASES = { 'default': {} } #required regardless of actual usage
+TEMPLATE_DIRS = (here('.'), )
+ 
+# VIEW
+def index(request, name):
+    return TemplateResponse(request, 'index.html', {'name': name})
+ 
+# URLS
+urlpatterns = patterns('', (r'^(?P&lt;name&gt;\w+)?$', index))
+ 
+if __name__=='__main__':
+    # set the ENV
+    os.environ['DJANGO_SETTINGS_MODULE'] = me
+    sys.path += (here('.'),)
+    # run the development server
+    from django.core import management
+    management.call_command('runserver','0.0.0.0:8000' )
+</code></pre> 
+ 
+<h1>Dependencies</h1> 
+ 
+<ul> 
+<li>python</li> 
+<li>django</li> 
+</ul><h1>Install</h1> 
+ 
+<ol> 
+<li>Install <a href="http://docs.djangoproject.com/en/dev/intro/install/">django</a> 
+</li> 
+<li>get the <a href="https://github.com/readevalprint/mini-django/raw/master/mini_django.py">code</a> <code>wget https://github.com/readevalprint/mini-django/raw/master/mini_django.py</code> 
+</li> 
+<li>run it <code>$ python ./mini_django.py</code> 
+</li> 
+<li>open browser <a href="http://localhost.com/Foo">http://localhost.com/Foo</a> 
+</li> 
+</ol><h1>License</h1> 
+ 
+<p>As-is. Public Domain. Don't blame me.</p> 
+ 
+<h1>Author</h1> 
+ 
+<p>Tim Watts (tim@readevalprint.com)</p></div></div> 
+  </div> 
   <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
