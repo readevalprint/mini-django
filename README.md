@@ -1,0 +1,1 @@
+An entire django app in a single file. Updated from [here](http://olifante.blogs.com/covil/2010/04/minimal-django.html)to use Django trunk. 
