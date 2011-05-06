@@ -1,5 +1,7 @@
 An entire django app in a single file. Updated from [here](http://olifante.blogs.com/covil/2010/04/minimal-django.html) to use Django trunk. 
 
+pico
+====
 This started off to see what the absolutely smallest requirements needed to run a Django project. Run the [pico_django.py](https://github.com/readevalprint/mini-django/blob/master/pico_django.py) with `$ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django` and go to http://localhost:8080
 
     from django.http import HttpResponse
@@ -13,6 +15,8 @@ This started off to see what the absolutely smallest requirements needed to run 
     
     urlpatterns = patterns('', (r'^(?P<name>\w+)?$', index))
 
+mini
+====
 But it needed a little more spice, so it got some template loading and then because I'm lazy I made the new version runnable directly.
 
 Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./micro_django.py` and go to http://localhost:8000/Foo
