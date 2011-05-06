@@ -20,7 +20,7 @@ This started off to see what the absolutely smallest requirements needed to run 
 
 mini
 ====
-But it needed a little more spice, so it got some template loading and then because I'm lazy I made the new version runnable directly.
+Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.
 
 Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./micro_django.py` and go to http://localhost:8000/Foo
 
