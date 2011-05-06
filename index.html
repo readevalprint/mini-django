@@ -57,8 +57,13 @@
  
 <h2>pico</h2> 
  
-<p>This started off to see what the absolutely smallest requirements needed to run a Django project. Run the <a href="https://github.com/readevalprint/mini-django/blob/master/pico_django.py">pico_django.py</a> with <code>$ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django</code> and go to <a href="http://localhost:8080">http://localhost:8080</a></p> 
- 
+<p>This started off to see what the absolutely smallest requirements needed to run a Django project. Run with 
+
+    $ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django
+
+and go to <a href="http://localhost:8080">http://localhost:8080</a></p> 
+
+<a href="https://github.com/readevalprint/mini-django/blob/master/pico_django.py">pico_django.py</a>  
 <pre><code>from django.http import HttpResponse
 from django.conf.urls.defaults import patterns
  
@@ -75,8 +80,13 @@ urlpatterns = patterns('', (r'^(?P&lt;name&gt;\w+)?$', index))
  
 <p>Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.</p> 
  
-<p>Run the <a href="https://github.com/readevalprint/mini-django/blob/master/mini_django.py">mini_django.py</a> with <code>$ python ./micro_django.py</code> and go to <a href="http://localhost:8000/Foo">http://localhost:8000/Foo</a></p> 
+<p>This is much easier to use
+
+    $ python ./micro_django.py
+
+Now go to <a href="http://localhost:8000/Foo">http://localhost:8000/Foo</a></p> 
  
+<a href="https://github.com/readevalprint/mini-django/blob/master/mini_django.py">mini_django.py</a> 
 <pre><code>import os, sys
 from django.conf.urls.defaults import patterns
 from django.template.response import TemplateResponse
