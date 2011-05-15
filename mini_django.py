@@ -30,4 +30,4 @@ if __name__=='__main__':
     sys.path += (here('.'),)
     # run the development server
     from django.core import management
-    management.call_command('runserver','0.0.0.0:8000' )
+    management.execute_from_command_line() 
