@@ -1,10 +1,13 @@
 '''
-Run this with $ python ./micro_django.py and go to http://localhost:8000/Foo
+Run this with `$ python ./miny_django.py runserver` and go to http://localhost:8000/
 '''
+import os
+import sys
+from django.conf import settings
 
-import os, sys
-from django.conf.urls.defaults import patterns
-from django.template.response import TemplateResponse
+from django.conf.urls import patterns
+from django.http import HttpResponse
+
 
 # this module
 me = os.path.splitext(os.path.split(__file__)[1])[0]
@@ -12,22 +15,31 @@ me = os.path.splitext(os.path.split(__file__)[1])[0]
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 
 # SETTINGS
-DEBUG=TEMPLATE_DEBUG=True
+DEBUG = True
 ROOT_URLCONF = me
-DATABASES = { 'default': {} } #required regardless of actual usage
+DATABASES = {'default': {}}  # required regardless of actual usage
 TEMPLATE_DIRS = (here('.'), )
+SECRET_KEY = 'so so secret'
+
+if not settings.configured:
+    settings.configure(**locals())
+
+# Settings must be configured before importing
+from django.views.decorators.csrf import csrf_exempt
+
 
 # VIEW
-def index(request, name):
-    return TemplateResponse(request, 'index.html', {'name': name})
+@csrf_exempt
+def index(request):
+    return HttpResponse("Hello from mini_django.py")
+
 
 # URLS
-urlpatterns = patterns('', (r'^(?P<name>\w+)?$', index))
+urlpatterns = patterns('', (r'^$', index))
 
-if __name__=='__main__':
+if __name__ == '__main__':
     # set the ENV
-    os.environ['DJANGO_SETTINGS_MODULE'] = me
     sys.path += (here('.'),)
     # run the development server
     from django.core import management
-    management.execute_from_command_line() 
+    management.execute_from_command_line()
