@@ -5,25 +5,44 @@ An entire django app in a single file. Updated from [here](http://olifante.blogs
 
 pico
 ====
-This started off to see what the absolutely smallest requirements needed to run a Django project. Run the [pico_django.py](https://github.com/readevalprint/mini-django/blob/master/pico_django.py) with `$ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django` and go to http://localhost:8080
+This started off to see what the absolutely smallest requirements needed to run a Django project. Run the [pico_django.py](https://github.com/readevalprint/mini-django/blob/master/pico_django.py) with `$ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django` and go to http://localhost:8000
+
+Or with uwsgi in production:
+
+    $ uwsgi --http :8000 -M --pythonpath=. \
+    --env DJANGO_SETTINGS_MODULE=pico_django \
+    -w "django.core.handlers.wsgi:WSGIHandler()"
+
+
+pico_django.py
+=============
+
 
     from django.http import HttpResponse
-    from django.conf.urls.defaults import patterns
+    from django.conf.urls import url
     
-    DEBUG=True
+    DEBUG = True
     ROOT_URLCONF = 'pico_django'
-    DATABASES = { 'default': {} }
+    DATABASES = {'default': {}}
+    
+    
     def index(request, name):
         return HttpResponse('Hello {name}!'.format(name=(name or 'World')))
     
-    urlpatterns = patterns('', (r'^(?P<name>\w+)?$', index))
-
+    urlpatterns = (
+        url(r'^(?P<name>\w+)?$', index)
+    )
+    
+    SECRET_KEY = "not so secret"
+    
 mini
 ====
 Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.
 
 Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./micro_django.py` and go to http://localhost:8000/Foo
 
+mini_djanog.py
+==============
 
     '''
     Run this with `$ python ./miny_django.py runserver` and go to http://localhost:8000/
