@@ -1,12 +1,11 @@
 '''
-Run this with `$ python ./miny_django.py runserver` and go to http://localhost:8000/
+Run this with `$ python ./mini_django.py runserver` and go
+to http://localhost:8000/
 '''
 import os
 import sys
 from django.conf import settings
-
 from django.conf.urls import patterns
-from django.http import HttpResponse
 
 
 # this module
@@ -18,24 +17,47 @@ here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 DEBUG = True
 ROOT_URLCONF = me
 DATABASES = {'default': {}}  # required regardless of actual usage
-TEMPLATE_DIRS = (here('.'), )
+TEMPLATE_DIRS = (
+    here('.'),  # Templates in current dir
+)
 SECRET_KEY = 'so so secret'
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+)
+INSTALLED_APPS = (
+    'django.contrib.sessions',
+)
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    here('static'),
+)
 
 if not settings.configured:
     settings.configure(**locals())
 
-# Settings must be configured before importing
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+# Settings must be configured before importing some things
+# from django.views.decorators.csrf import csrf_exempt
 
 
 # VIEW
-@csrf_exempt
-def index(request):
-    return HttpResponse("Hello from mini_django.py")
+def index(request, name=None):
+    return render(request, 'index.html', {'name': name})
 
 
 # URLS
-urlpatterns = patterns('', (r'^$', index))
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns = patterns('',
+                       (r'^$', index),
+                       (r'^(?P<name>\w+)?$', index)
+                       )
+
+urlpatterns += staticfiles_urlpatterns()
 
 if __name__ == '__main__':
     # set the ENV
