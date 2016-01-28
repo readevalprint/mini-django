@@ -41,7 +41,7 @@ Soon pico needed a little more spice, so it got some template loading and then b
 
 Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./micro_django.py` and go to http://localhost:8000/Foo
 
-mini_djanog.py
+mini_django.py
 ==============
 
     '''
