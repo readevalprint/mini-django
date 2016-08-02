@@ -19,6 +19,31 @@ DATABASES = {'default': {}}  # required regardless of actual usage
 TEMPLATE_DIRS = (
     here('.'),  # Templates in current dir
 )
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': TEMPLATE_DIRS,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': (
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+            ),
+        },
+    },
+]
 SECRET_KEY = 'so so secret'
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -32,6 +57,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     here('static'),
 )
+
+SILENCED_SYSTEM_CHECKS = ['1_8.W001']  # Silance warning for using TEMPLATE_*
 
 if not settings.configured:
     settings.configure(**locals())
