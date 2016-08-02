@@ -5,7 +5,6 @@ to http://localhost:8000/
 import os
 import sys
 from django.conf import settings
-from django.conf.urls import patterns
 
 
 # this module
@@ -48,12 +47,13 @@ def index(request, name=None):
 
 
 # URLS
+from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-urlpatterns = patterns('',
-                       (r'^$', index),
-                       (r'^(?P<name>\w+)?$', index)
-                       )
+urlpatterns = [
+    url(r'^$', index),
+    url(r'^(?P<name>\w+)?$', index),
+]
 
 urlpatterns += staticfiles_urlpatterns()
 
