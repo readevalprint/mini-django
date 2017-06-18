@@ -17,7 +17,7 @@ mini
 ====
 Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.
 
-Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./mini_django.py 0.0.0.0:8000` and go to http://localhost:8000/Foo
+Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./mini_django.py runserver 0.0.0.0:8000` and go to http://localhost:8000/Foo
 
 Dependencies
 ===========
