@@ -27,7 +27,7 @@ Dependencies
 Install
 ======
 1. Clone this repo
-2. `pip install requirements.txt`
+2. `pip install django`
 3. Run
     1. `python ./mini_django.py runserver 0.0.0.0:8000`
     2. `PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django`

@@ -3,6 +3,7 @@ from django.conf.urls import url
 
 DEBUG = True
 ROOT_URLCONF = 'pico_django'
+ALLOWED_HOSTS = '*'
 DATABASES = {'default': {}}
 
 
