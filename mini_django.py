@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.shortcuts import render
 '''
 Run this with `$ python ./mini_django.py runserver` and go
@@ -11,10 +11,10 @@ from django.conf import settings
 
 # this module
 me = os.path.splitext(os.path.split(__file__)[1])[0]
+
 # helper function to locate this dir
-
-
-def here(x): return os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+def here(x):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 
 
 # SETTINGS
@@ -27,19 +27,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': here('.'),
-        'APP_DIRS': [
-            here('.'),  # Templates in current dir
-        ],
-        'OPTIONS': {
-            'context_processors': (
-                'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'django.template.context_processors.request',
-            ),
-        },
     },
 ]
 SECRET_KEY = 'so so secret'
@@ -60,9 +47,8 @@ STATICFILES_DIRS = (
 if not settings.configured:
     settings.configure(**locals())
 
+# Settings must be configured before importing some things like static files
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-# Settings must be configured before importing some things
-# from django.views.decorators.csrf import csrf_exempt
 
 
 # VIEW
@@ -72,8 +58,8 @@ def index(request, name=None):
 # URLS
 
 urlpatterns = [
-    url(r'^$', index),
-    url(r'^(?P<name>\w+)?$', index),
+    path('', index),
+    path('<str:name>', index)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
