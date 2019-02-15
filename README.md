@@ -2,6 +2,7 @@ Mini_django.py
 ==============
 
 An entire django app in a single file. Updated from [here](http://olifante.blogs.com/covil/2010/04/minimal-django.html) to use Django trunk.
+Works with Django 1.1 and 2.1.
 
 pico
 ====
@@ -23,6 +24,7 @@ Dependencies
 ===========
 * python
 * django
+* uWSGI (optional)
 
 Install
 ======
