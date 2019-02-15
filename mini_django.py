@@ -1,9 +1,10 @@
-from django.urls import path
-from django.shortcuts import render
 '''
 Run this with `$ python ./mini_django.py runserver` and go
 to http://localhost:8000/
 '''
+
+from django.urls import path
+from django.shortcuts import render
 import os
 import sys
 from django.conf import settings
@@ -29,14 +30,7 @@ TEMPLATES = [
         'DIRS': here('.'),
     },
 ]
-SECRET_KEY = 'so so secret'
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-)
-INSTALLED_APPS = (
-    'django.contrib.sessions',
-)
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
@@ -47,7 +41,7 @@ STATICFILES_DIRS = (
 if not settings.configured:
     settings.configure(**locals())
 
-# Settings must be configured before importing some things like static files
+# Settings must be configured before importing some things like staticfiles
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
