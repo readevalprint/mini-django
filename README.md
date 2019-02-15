@@ -10,9 +10,9 @@ This started off to see what the absolutely smallest requirements needed to run 
 
 Or with uwsgi in production:
 
-    $ uwsgi --http :8000 -M --pythonpath=. \
+    $ uwsgi --http :8000 -M --pythonpath=. 
     --env DJANGO_SETTINGS_MODULE=pico_django \
-    -w "django.core.handlers.wsgi:WSGIHandler()"
+    -w "django.core.wsgi:get_wsgi_application()"
 
 mini
 ====
