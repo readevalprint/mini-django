@@ -1,3 +1,5 @@
+from django.conf.urls import url
+from django.shortcuts import render
 '''
 Run this with `$ python ./mini_django.py runserver` and go
 to http://localhost:8000/
@@ -10,28 +12,24 @@ from django.conf import settings
 # this module
 me = os.path.splitext(os.path.split(__file__)[1])[0]
 # helper function to locate this dir
-here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+
+
+def here(x): return os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+
 
 # SETTINGS
 DEBUG = True
 ROOT_URLCONF = me
 DATABASES = {'default': {}}  # required regardless of actual usage
-TEMPLATE_DIRS = (
-    here('.'),  # Templates in current dir
-)
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.core.context_processors.request',
-)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': TEMPLATE_DIRS,
-        'APP_DIRS': True,
+        'DIRS': here('.'),
+        'APP_DIRS': [
+            here('.'),  # Templates in current dir
+        ],
         'OPTIONS': {
             'context_processors': (
                 'django.template.context_processors.debug',
@@ -58,12 +56,11 @@ STATICFILES_DIRS = (
     here('static'),
 )
 
-SILENCED_SYSTEM_CHECKS = ['1_8.W001']  # Silance warning for using TEMPLATE_*
 
 if not settings.configured:
     settings.configure(**locals())
 
-from django.shortcuts import render
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 # Settings must be configured before importing some things
 # from django.views.decorators.csrf import csrf_exempt
 
@@ -72,10 +69,7 @@ from django.shortcuts import render
 def index(request, name=None):
     return render(request, 'index.html', {'name': name})
 
-
 # URLS
-from django.conf.urls import url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', index),

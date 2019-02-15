@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.conf.urls import url
+from django.urls import path
+
 
 DEBUG = True
 ROOT_URLCONF = 'pico_django'
@@ -7,11 +8,12 @@ ALLOWED_HOSTS = '*'
 DATABASES = {'default': {}}
 
 
-def index(request, name):
+def index(request, name=None):
     return HttpResponse('Hello {name}!'.format(name=(name or 'World')))
 
 urlpatterns = [
-    url(r'^(?P<name>\w+)?$', index)
+    path('', index),
+    path('<str:name>', index)
 ]
 
 SECRET_KEY = "not so secret"
