@@ -20,15 +20,29 @@ Or with uwsgi in production:
 
 mini
 ====
-Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable.
+Soon pico needed a little more spice, so it got some template loading and then because I'm lazy I made the new version directly runnable. Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with 
 
-Run the [mini_django.py](https://github.com/readevalprint/mini-django/blob/master/mini_django.py) with `$ python ./mini_django.py runserver 0.0.0.0:8000` and go to http://localhost:8000/Foo
+    $ python ./mini_django.py runserver 0.0.0.0:8000
+    
+and go to http://localhost:8000/Foo
+
+
+api
+===
+
+Often I need to use django-rest-framework for a simple one-off task, thankfully, mini_django can be adapted quite easily into [mini_api.py](https://github.com/readevalprint/mini-django/blob/master/mini_api.py)
+
+    $ python ./mini_api.py runserver 0.0.0.0:8000
+    
+and go to http://localhost:8000
+
 
 Dependencies
 ===========
 * python
 * django
-* uWSGI (optional)
+* [uWSGI](https://uwsgi-docs.readthedocs.io) (optional)
+* [django rest framework](http://django-rest-framework.org) (optional)
 
 Install
 ======
@@ -45,4 +59,4 @@ As-is. Public Domain. Don't blame me.
 
 Author
 ======
-Tim Watts (tim@readevalprint.com)
+Tim Watts (tim@readevalprint.com) [@readevalprint](https://twitter.com/readevalprint)
