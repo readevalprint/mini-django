@@ -2,15 +2,25 @@
 {% load static%}
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <title>Mini Django</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <style>
+      .card {
+        margin: auto;
+      }
+    </style> 
 
-  <title>Cats</title>
-</head>
-
-<body>
-  <h1>It's a lovely day eh, {{name|default:"chap"}}?</h1>
-  <p>Try going to /[name]</p>
-  <img src="{% static "cat.jpg" %}">
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Hello {{name|default:"Anon"}}</h1>
+        <p>Try going to <a href="{% url "named" "bob" %}">{% url "named" "bob" %}</a> </p>
+        <p>This is a demo of mini-django</p>
+        <img src="{% static "cat.jpg" %}">
+      </div>
+    </div>
+  </body>
 </html>

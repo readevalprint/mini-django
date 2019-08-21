@@ -1,7 +1,7 @@
-'''
+"""
 Run this with `$ python ./mini_django.py runserver` and go
 to http://localhost:8000/
-'''
+"""
 
 from django.urls import path
 from django.shortcuts import render
@@ -21,21 +21,16 @@ def here(x):
 # SETTINGS
 DEBUG = True
 ROOT_URLCONF = me
-DATABASES = {'default': {}}  # required regardless of actual usage
+DATABASES = {"default": {}}  # required regardless of actual usage
 
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': here('.'),
-    },
+    {"BACKEND": "django.template.backends.django.DjangoTemplates", "DIRS": here(".")}
 ]
 
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    here('static'),
-)
+STATIC_URL = "/static/"
+STATICFILES_DIRS = (here("static"),)
 
 
 if not settings.configured:
@@ -47,20 +42,19 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # VIEW
 def index(request, name=None):
-    return render(request, 'index.html', {'name': name})
+    return render(request, "index.html", {"name": name})
+
 
 # URLS
 
-urlpatterns = [
-    path('', index),
-    path('<str:name>', index)
-]
+urlpatterns = [path("", index), path("<str:name>", index, name="named")]
 
 urlpatterns += staticfiles_urlpatterns()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # set the ENV
-    sys.path += (here('.'),)
+    sys.path += (here("."),)
     # run the development server
     from django.core import management
+
     management.execute_from_command_line()
