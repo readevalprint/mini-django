@@ -1,6 +1,14 @@
 [![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/readevalprint/mini-django)
 
+Quick Start
+===========
 
+Clone https://github.com/readevalprint/mini-django
+
+    $ docker build . -t mini-django
+    $ docker run -p 8000:8000 -v `pwd`:/app mini-django
+
+and go to http://localhost:8000/Foo
 
 Mini_django.py
 ==============
