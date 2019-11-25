@@ -67,4 +67,4 @@ urlpatterns += staticfiles_urlpatterns()
 # $ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=mini_api
 
 # for example run with uwsgi
-# `$ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=mini_api -w "django.core.handlers.wsgi:WSGIHandler()"`
+# `$ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=mini_api -w "django.core.wsgi:get_wsgi_application()"`
