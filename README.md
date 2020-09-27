@@ -68,8 +68,8 @@ and go to http://localhost:8000
 
 Production
 ==========
-You can also run these Django projects production-like mode using a WSGI server
-like `uWSGI` or `gunicorn`. 
+You can also run these Django projects in production-like mode using a WSGI server
+like `uWSGI` or `gunicorn`.
 
 uWSGI
 -----
@@ -110,3 +110,9 @@ As-is. Public Domain. Don't blame me.
 Author
 ======
 Tim Watts (tim@readevalprint.com) [@readevalprint](https://twitter.com/readevalprint)
+
+
+Contributors
+============
+Ivan Savov (ivan@minireference.com) [@minireference](https://twitter.com/minireference)
+
