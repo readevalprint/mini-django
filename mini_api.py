@@ -1,9 +1,18 @@
-from django.conf.urls import url
-from django.conf import settings
-import os
+"""
+Run with `python mini_api.py runserver` and go to http://localhost:8000/.
+"""
+from os.path import abspath, dirname, join
 
+import django
+from django.conf import settings
+from django.urls import re_path
+
+
+
+# SETTINGS
+BASE_DIR = dirname(abspath(__file__))
 DEBUG = True
-ROOT_URLCONF = "mini_api"
+ROOT_URLCONF = "mini_api"  # this module
 ALLOWED_HOSTS = "*"
 DATABASES = {"default": {}}
 SECRET_KEY = "not so secret"
@@ -12,28 +21,15 @@ INSTALLED_APPS = (
     "django.contrib.auth",
     "rest_framework",
 )
-# helper function to locate this dir
-def here(x):
-    return os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
-
-
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": here("."),
-        "APP_DIRS": True,
-    }
-]
-
+TEMPLATES = [{"BACKEND": "django.template.backends.django.DjangoTemplates",
+              "DIRS": [BASE_DIR,], "APP_DIRS": True}]
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    here('static'),
-)
+STATICFILES_DIRS = (join(BASE_DIR, 'static'),)
 
-
-
+SETTINGS = dict((key,val) for key, val in locals().items() if key.isupper())
 if not settings.configured:
-    settings.configure(**locals())
+    settings.configure(**SETTINGS)
+django.setup()
 
 # Settings must be configured before importing some things like staticfiles
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -41,30 +37,33 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
+
+# VIEWS
+
 class Index(APIView):
     """
-    View to list all users in the system.
-
-    * Requires token authentication.
-    * Only admin users are able to access this view.
+    Respond with a greeting for a user or the whole world!
     """
-
     authentication_classes = ()
     permission_classes = ()
 
-    def get(self, request, name, format=None):
-        """
-        Return a list of all users.
-        """
+    def get(self, request, name=None, format=None):
         return Response("hi " + (name or "World!!"))
 
 
-urlpatterns = [url(r"^(?P<name>\w+)?$", Index.as_view())]
+
+# URLS
+
+urlpatterns = [
+    re_path(r"^(?P<name>\w+)?$", Index.as_view())
+]
 urlpatterns += staticfiles_urlpatterns()
 
 
-# run with djagno dev server
-# $ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=mini_api
 
-# for example run with uwsgi
-# `$ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=mini_api -w "django.core.wsgi:get_wsgi_application()"`
+# CLI
+
+if __name__ == "__main__":
+    # make this script runnable like the ./manage.py command line script
+    from django.core import management
+    management.execute_from_command_line()
