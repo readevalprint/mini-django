@@ -21,5 +21,5 @@ SECRET_KEY = "not so secret"
 # run with djagno dev server
 # $ PYTHONPATH=. django-admin.py runserver 0.0.0.0:8000 --settings=pico_django
 
-# for example run with uwsgi
-# `$ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=pico_django -w "django.core.wsgi:get_wsgi_application()"`
+# for example run with uWSGI
+# $ uwsgi --http :8000 -M --pythonpath=. --env DJANGO_SETTINGS_MODULE=pico_django -w "django.core.wsgi:get_wsgi_application()"
